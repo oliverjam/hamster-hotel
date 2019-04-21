@@ -1,4 +1,5 @@
 const supertest = require("supertest");
+const jwt = require("jsonwebtoken");
 const router = require("../router");
 const { build } = require("../database/build");
 require("dotenv").config();
@@ -11,6 +12,18 @@ describe("Server routes", () => {
       .expect("content-type", "text/html")
       .then(response => {
         expect(response.text).toMatch(/<title>Hamster Hotel<\/title>/);
+      });
+  });
+  test("logged in home route is rendered correctly", () => {
+    const user = jwt.sign({ username: "oli" }, process.env.SECRET);
+    return supertest(router)
+      .get("/")
+      .set("cookie", [`user=${user}`])
+      .expect(200)
+      .expect("content-type", "text/html")
+      .then(response => {
+        expect(response.text).toMatch(/<title>Hamster Hotel<\/title>/);
+        expect(response.text).toMatch(/<a href="\/logout">/i);
       });
   });
   test("nonexistent route renders error", () => {
