@@ -1,6 +1,6 @@
 # Hamster Hotel
 
-A fun project for learning about databases and authentication. Made with :two_hearts: by @oliverjam & @starsuit
+A fun project for learning about databases and authentication. Made with :two_hearts: by [@oliverjam](https://github.com/oliverjam) & [@starsuit](https://github.com/starsuit)
 
 ## Run locally
 
