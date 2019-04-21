@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/oliverjam/hamster-hotel#readme",
   "devDependencies": {
+    "eslint": "^5.16.0",
     "jest": "^24.7.1",
     "nodemon": "^1.18.11",
     "supertest": "^4.0.2"
