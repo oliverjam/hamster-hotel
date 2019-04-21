@@ -1,6 +1,7 @@
 const { parse } = require("querystring");
 const bcrypt = require("bcrypt");
 const error = require("../templates/error");
+const home = require("../templates/home");
 const db = require("../../database/connection");
 
 const handleSignup = (request, response) => {
@@ -32,9 +33,15 @@ const handleSignup = (request, response) => {
       .catch(err => {
         console.log(err);
         // error: duplicate key 23505 error code
+        if (err.code === "23505") {
+          response.writeHead(400, { "content-type": "text/html" });
+          const html = home("sorry, that username is already taken!");
+          response.end(html);
+        } else {
         response.writeHead(500, { "content-type": "text/html" });
         const html = error({ status: 500 });
         response.end(html);
+        }
       });
   });
 };

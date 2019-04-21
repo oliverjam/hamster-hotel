@@ -1,6 +1,6 @@
 const html = String.raw;
 
-const home = () => {
+const home = (message = "") => {
   return html`
     <!DOCTYPE html>
     <html lang="en">
@@ -20,6 +20,7 @@ const home = () => {
           <label for="password">password</label>
           <input id="password" name="password" type="password" />
           <button type="submit">Sign up</button>
+          <p>${message}</p>
         </form>
 
         <form action="/login" method="POST">
