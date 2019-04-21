@@ -1,5 +1,4 @@
 const { parse } = require("querystring");
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const cookie = require("cookie");
 const error = require("../templates/error");
@@ -32,7 +31,9 @@ const handleSignup = (request, response) => {
         // error: duplicate key 23505 error code
         if (err.code === "23505") {
           response.writeHead(400, { "content-type": "text/html" });
-          const html = home("sorry, that username is already taken!");
+          const html = home({
+            message: "sorry, that username is already taken!",
+          });
           response.end(html);
         } else {
           response.writeHead(500, { "content-type": "text/html" });
