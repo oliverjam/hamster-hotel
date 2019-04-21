@@ -37,13 +37,17 @@ describe("Server routes", () => {
         );
       });
   });
-  test("login route returns JSON data for now", () => {
+  test("unauthenticated login returns error", () => {
     const formData = "username=oli&password=hello";
     return supertest(router)
       .post("/login")
       .send(formData)
-      .expect(200)
-      .expect("content-type", "application/json")
+      .expect(401)
+      .expect("content-type", "text/html")
+      .then(response => {
+        expect(response.text).toMatch(/incorrect login details/);
+      });
+  });
       .then(response => {
         expect(response.body).toEqual({ username: "oli", password: "hello" });
       });
