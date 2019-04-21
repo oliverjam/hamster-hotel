@@ -19,6 +19,7 @@ const searchUser = ({ username, password }) => {
       username
     ])
     .then(response => {
+      if (!response.rows.length) return false;
       return bcrypt.compare(password, response.rows[0].password);
     });
 };
