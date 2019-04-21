@@ -13,4 +13,14 @@ const createUser = ({ username, password }) => {
     });
 };
 
-module.exports = { createUser };
+const searchUser = ({ username, password }) => {
+  return db
+    .query("SELECT username, password FROM hamsters WHERE username = $1", [
+      username
+    ])
+    .then(response => {
+      return bcrypt.compare(password, response.rows[0].password);
+    });
+};
+
+module.exports = { createUser, searchUser };
