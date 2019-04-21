@@ -1,5 +1,7 @@
 const supertest = require("supertest");
 const router = require("../router");
+const { build } = require("../database/build");
+require("dotenv").config();
 
 describe("Server routes", () => {
   test("home route is rendered correctly", () => {
@@ -13,7 +15,7 @@ describe("Server routes", () => {
   });
   test("nonexistent route renders error", () => {
     return supertest(router)
-      .get("/boobs")
+      .get("/bunnies")
       .expect(404)
       .expect("content-type", "text/html")
       .then(response => {
@@ -31,6 +33,18 @@ describe("Server routes", () => {
       .expect("content-type", "application/json")
       .then(response => {
         expect(response.body).toEqual({ username: "oli", password: "hello" });
+      });
+  });
+  test("signup route redirects to homepage", async () => {
+    await build();
+    const formData = "username=oli&password=hello";
+    return supertest(router)
+      .post("/signup")
+      .send(formData)
+      .expect(302)
+      .expect("location", "/")
+      .then(response => {
+        expect(response.headers["set-cookie"]).toBeTruthy();
       });
   });
 });
