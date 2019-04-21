@@ -20,7 +20,8 @@ CREATE TABLE hamsters (
 );
 
 INSERT INTO hamsters (username, password) VALUES
-('popchop81', 'carrots4eva');
+('popchop81', 'carrots4eva'),
+('popchop91', '$2b$10$mCoXArsx3d2CMvdr19h0M.bJBtRuAQT5pP7NUxs.J0/RNF8QPMZhS');
 
 COMMIT;
 `;
