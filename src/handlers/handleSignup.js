@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const error = require("../templates/error");
 const home = require("../templates/home");
-const db = require("../../database/connection");
+const db = require("../database/connection");
 
 const handleSignup = (request, response) => {
   let data = "";
@@ -27,12 +27,10 @@ const handleSignup = (request, response) => {
         );
       })
       .then(() => {
-        console.log("successful signup");
         const signed = jwt.sign({ username }, process.env.SECRET);
-        console.log(signed);
         response.writeHead(302, {
-          Location: "/",
-          "set-cookie": `user=${signed}; HttpOnly`
+          location: "/",
+          "set-cookie": `user=${signed}; HttpOnly`,
         });
         response.end();
       })
