@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --watch"
+    "test": "jest --watch",
+    "setup": "node SETUP.js"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,11 @@
     "eslint": "^5.16.0",
     "jest": "^24.7.1",
     "nodemon": "^1.18.11",
+    "prettier": "^1.17.0",
     "supertest": "^4.0.2"
   },
   "dependencies": {
+    "dotenv": "^7.0.0",
     "pg": "^7.10.0"
   }
 }
