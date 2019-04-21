@@ -13,7 +13,7 @@ CREATE TYPE colours AS ENUM (${COLOURS.map(col => `'${col}'`).join(", ")});
 CREATE TABLE hamsters (
   id SERIAL PRIMARY KEY,
   name VARCHAR(64),
-  username VARCHAR(64) NOT NULL,
+  username VARCHAR(64) NOT NULL UNIQUE,
   password VARCHAR(64) NOT NULL,
   sex sexes,
   colour colours
