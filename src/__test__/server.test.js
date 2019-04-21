@@ -48,8 +48,15 @@ describe("Server routes", () => {
         expect(response.text).toMatch(/incorrect login details/);
       });
   });
+  test("authenticated login redirects to logged in home", () => {
+    const formData = "username=popchop91&password=carrots4eva";
+    return supertest(router)
+      .post("/login")
+      .send(formData)
+      .expect(302)
+      .expect("location", "/")
       .then(response => {
-        expect(response.body).toEqual({ username: "oli", password: "hello" });
+        expect(response.headers["set-cookie"]).toBeTruthy();
       });
   });
   test("signup route redirects to homepage", async () => {
