@@ -1,6 +1,7 @@
 const { parse } = require("querystring");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cookie = require("cookie");
 const error = require("../templates/error");
 const home = require("../templates/home");
 const { createUser } = require("../database/user");
@@ -22,7 +23,7 @@ const handleSignup = (request, response) => {
         const signed = jwt.sign({ username }, process.env.SECRET);
         response.writeHead(302, {
           location: "/",
-          "set-cookie": `user=${signed}; HttpOnly`,
+          "set-cookie": cookie.serialize("user", signed, { httpOnly: true }),
         });
         response.end();
       })
