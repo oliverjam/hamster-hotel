@@ -7,7 +7,7 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "test": "jest --watch",
-    "setup": "node SETUP.js",
+    "setup": "node SETUP.js && node SETUP_TEST.js",
     "setup-test": "node SETUP_TEST.js"
   },
   "repository": {
