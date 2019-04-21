@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const error = require("../templates/error");
 const home = require("../templates/home");
-const db = require("../database/connection");
+const { createUser } = require("../database/user");
 
 const handleSignup = (request, response) => {
   let data = "";
@@ -17,15 +17,7 @@ const handleSignup = (request, response) => {
       response.end(html);
     }
     const { username, password } = parse(data);
-    bcrypt
-      .genSalt(10)
-      .then(salt => bcrypt.hash(password, salt))
-      .then(hash => {
-        return db.query(
-          "INSERT INTO hamsters (username, password) VALUES ($1, $2)",
-          [username, hash]
-        );
-      })
+    createUser({ username, password })
       .then(() => {
         const signed = jwt.sign({ username }, process.env.SECRET);
         response.writeHead(302, {
