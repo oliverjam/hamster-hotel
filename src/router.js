@@ -2,7 +2,8 @@ const {
   handleHome,
   handleMissing,
   handleLogin,
-  handleSignup
+  handleSignup,
+  handleLogout,
 } = require("./handlers");
 
 const router = (request, response) => {
@@ -10,6 +11,8 @@ const router = (request, response) => {
     handleHome(request, response);
   } else if (request.url === "/login") {
     handleLogin(request, response);
+  } else if (request.url === "/logout") {
+    handleLogout(request, response);
   } else if (request.url === "/signup") {
     handleSignup(request, response);
   } else {
