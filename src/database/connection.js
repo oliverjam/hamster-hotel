@@ -10,7 +10,6 @@ if (!DB_URL) throw new Error("Enviroment variable DB_URL must be set");
 
 const options = {
   connectionString: DB_URL,
-  max: 2,
   ssl: !DB_URL.includes("localhost"),
 };
 
